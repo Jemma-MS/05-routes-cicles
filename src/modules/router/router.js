@@ -1,14 +1,18 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
 const routes = [
+    {
+        path: '/',
+        redirect: '/home'
+    },
     { 
-        path: '/',                    
+        path: '/home',                    
         component: () => import (/*  webpackChunkName: "AboutPage" */ '@/modules/pokemon/pages/ListPage') 
     },
     {   path: '/about',               
         component: () => import (/*  webpackChunkName: "AboutPage" */ '@/modules/pokemon/pages/AboutPage') 
     },
-    {   path: '/:id', 
+    {   path: '/pokemonid/:id', 
         name: 'pokemon-id', 
         component: () => import (/*  webpackChunkName: "PokemonPage" */ '@/modules/pokemon/pages/PokemonPage'),
         props: ( route ) => {
@@ -19,7 +23,8 @@ const routes = [
     },
     {   
         path: '/:pathMatch(.*)*',
-        component: () => import (/*  webpackChunkName: "NoFoundPage" */ '@/modules/shared/pages/NoPageFound')
+        //component: () => import (/*  webpackChunkName: "NoFoundPage" */ '@/modules/shared/pages/NoPageFound')
+        
     },
 ]
 
