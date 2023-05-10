@@ -2,11 +2,12 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 
 const routes = [
     {
-        path: '/',
+        path: '/',       
         redirect: '/home'
     },
     { 
-        path: '/home',                    
+        path: '/home',   
+        name: 'home',                 
         component: () => import (/*  webpackChunkName: "AboutPage" */ '@/modules/pokemon/pages/ListPage') 
     },
     {   path: '/about',               
