@@ -6,7 +6,7 @@
         <CustomLink
             v-for="link in links"
             :key="link.to"
-            
+            :link="link"
         />
         
     </div>
@@ -14,15 +14,16 @@
 
 <script>
 import { defineAsyncComponent } from 'vue'
+
 export default {
 
     data() { 
         return {
             links: [
-                { to: '/', name: 'Pokemons' },
-                { to: '/50', name: 'Por ID' },
+                { to: '/home', name: 'Pokemons' },
+                { to: '/pokemonid/50', name: 'Por ID' },
                 { to: '/about', name: 'About' },
-                { to: '/https://google.com', name: 'Google' },
+                { to: 'https://google.com', name: 'Google' },
             ]
         }
     },
