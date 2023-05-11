@@ -3,26 +3,39 @@ import { createRouter, createWebHashHistory } from 'vue-router'
 const routes = [
     {
         path: '/',       
-        redirect: '/home'
+        redirect: '/pokemon'
     },
-    { 
-        path: '/home',   
-        name: 'home',                 
-        component: () => import (/*  webpackChunkName: "AboutPage" */ '@/modules/pokemon/pages/ListPage') 
+    {
+        path: '/pokemon',
+        name: 'pokemon', 
+        component: () => import (/*  webpackChunkName: "PokemonLayout" */ '@/modules/pokemon/layouts/PokemonLayout'),
+        children: [
+            { 
+                path: 'home',   
+                name: 'pokemon-home',                 
+                component: () => import (/*  webpackChunkName: "AboutPage" */ '@/modules/pokemon/pages/ListPage') 
+            },
+            {   path: '/about',  
+                name: 'pokemon-about',                 
+                component: () => import (/*  webpackChunkName: "AboutPage" */ '@/modules/pokemon/pages/AboutPage') 
+            },
+            {   path: '/pokemonid/:id', 
+                name: 'pokemon-id', 
+                component: () => import (/*  webpackChunkName: "PokemonPage" */ '@/modules/pokemon/pages/PokemonPage'),
+                props: ( route ) => {
+                    const id = Number ( route.params. id )
+                    return isNaN( Number( id ) ) ? { id: 1 } : { id: Number( id ) }
+                }    
+            },
+            {
+                path: '',
+                redirect: { name: 'pokemon-about' }
+            }
+        ]
     },
-    {   path: '/about',  
-        name: 'about',                 
-        component: () => import (/*  webpackChunkName: "AboutPage" */ '@/modules/pokemon/pages/AboutPage') 
-    },
-    {   path: '/pokemonid/:id', 
-        name: 'pokemon-id', 
-        component: () => import (/*  webpackChunkName: "PokemonPage" */ '@/modules/pokemon/pages/PokemonPage'),
-        props: ( route ) => {
-            const id = Number ( route.params. id )
-            return isNaN( Number( id ) ) ? { id: 1 } : { id: Number( id ) }
-        }
 
-    },
+
+   
     {   
         path: '/:pathMatch(.*)*',
         //component: () => import (/*  webpackChunkName: "NoFoundPage" */ '@/modules/shared/pages/NoPageFound')
