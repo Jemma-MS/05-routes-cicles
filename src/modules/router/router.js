@@ -35,7 +35,29 @@ const routes = [
     },
 
 
-   
+    //DBZ Layout
+    {
+        path: '/dbz',       
+        name: 'dbz',
+        component: () => import (/*  webpackChunkName: "DragonBallLayout" */ '@/modules/dbz/layouts/DragonBallLayout'),
+        children: [
+            {
+                path: 'characters',   
+                name: 'dbz-characters',
+                component: () => import (/*  webpackChunkName: "AboutPage" */ '@/modules/dbz/pages/Characters') 
+            },
+            {
+                path: 'about',   
+                name: 'dbz-about',                 
+                component: () => import (/*  webpackChunkName: "AboutPage" */ '@/modules/dbz/pages/About') 
+            },
+            {
+                path: '',   
+                name: 'dbz-characters',                 
+                component: () => import (/*  webpackChunkName: "AboutPage" */ '@/modules/dbz/pages/Characters')
+            }
+        ]
+    },
     {   
         path: '/:pathMatch(.*)*',
         //component: () => import (/*  webpackChunkName: "NoFoundPage" */ '@/modules/shared/pages/NoPageFound')
